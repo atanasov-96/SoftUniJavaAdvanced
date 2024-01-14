@@ -10,26 +10,43 @@ public class MathPotato_07 {
 
         String[] children = scanner.nextLine().split(" ");
         int numberOfTurns = Integer.parseInt(scanner.nextLine());
+
         PriorityQueue<String> childrenInQueue = new PriorityQueue<>();
 
-        for (int i = 0; i < children.length ; i++) {
+        for (int i = 0; i < children.length; i++) {
             childrenInQueue.offer(children[i]);
         }
+
+        int cycle = 1;
         while (childrenInQueue.size() != 1) {
             for (int i = 1; i < numberOfTurns; i++) {
-                String currChild = "";
-
-                if (i % i == 0 && i % 1 == 0) {
-                    currChild = childrenInQueue.peek();
-                    System.out.printf("Prime %s%n",currChild);
-                } else {
-                    currChild = childrenInQueue.poll();
+                String currChild = childrenInQueue.poll();
+                if (currChild != null) {
                     childrenInQueue.offer(currChild);
                 }
             }
-            String childToRemove = childrenInQueue.poll();
-            System.out.println("Removed " + childToRemove);
+            if (isPrime(cycle)){
+                System.out.printf("Prime %s%n", childrenInQueue.peek());
+            } else {
+                String childToRemove = childrenInQueue.poll();
+                System.out.println("Removed " + childToRemove);
+            }
+            cycle++;
         }
         System.out.printf("Last is %s", childrenInQueue.poll());
     }
+    static boolean isPrime(int n) {
+        if (n <= 1)
+            return false;
+        else if (n == 2)
+            return true;
+        else if (n % 2 == 0)
+            return false;
+        for (int i = 3; i <= Math.sqrt(n); i += 2) {
+            if (n % i == 0)
+                return false;
+        }
+        return true;
+    }
 }
+

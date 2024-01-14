@@ -1,7 +1,8 @@
 package Stacks_And_Queues_Lab;
 
 import java.util.ArrayDeque;
-import java.util.Collections;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class SimpleCalculator_02 {
@@ -9,23 +10,20 @@ public class SimpleCalculator_02 {
         Scanner scanner = new Scanner(System.in);
         String[] input = scanner.nextLine().split(" ");
 
-        ArrayDeque<String> tokens = new ArrayDeque<>();
-        Collections.addAll(tokens, input);
-
+        ArrayDeque<String> tokens = new ArrayDeque<>(List.of(input));
         while (tokens.size() > 1) {
-            int firstNumber = Integer.parseInt(tokens.pop());
+            int firstNum = Integer.parseInt(tokens.pop());
             String operator = tokens.pop();
-            int secondNumber = Integer.parseInt(tokens.pop());
-
+            int secondNum = Integer.parseInt(tokens.pop());
             int result = 0;
-            if (operator.equals("+")) {
-                result = firstNumber + secondNumber;
-            } else {
-                result = firstNumber - secondNumber;
+
+            if ("+".equals(operator)) {
+                result = firstNum + secondNum;
+            } else if ("-".equals(operator)) {
+                result = firstNum - secondNum;
             }
             tokens.push(String.valueOf(result));
         }
-        System.out.println(tokens.peek());
-
+        System.out.println(tokens.pop());
     }
 }
