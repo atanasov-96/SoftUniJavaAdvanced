@@ -8,19 +8,22 @@ public class BasicQueueOperations_04 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String[] operators = scanner.nextLine().split(" ");
-        int offerCount = Integer.parseInt(operators[0]);
-        int pollCount = Integer.parseInt(operators[1]);
-        int checkElement = Integer.parseInt(operators[2]);
-        String[] numbers = scanner.nextLine().split(" ");
+        String[] numbers = scanner.nextLine().split("\\s+");
 
         ArrayDeque<Integer> queue = new ArrayDeque<>();
-        for (int offer = 0; offer < offerCount; offer++) {
-            queue.offer(Integer.valueOf(numbers[offer]));
+
+        int queCount = Integer.parseInt(operators[0]);
+        for (int q = 0; q < queCount; q++) {
+            queue.offer(Integer.valueOf(numbers[q]));
         }
-        for (int poll = 0; poll < pollCount; poll++) {
+
+        int dequeCount = Integer.parseInt(operators[1]);
+        for (int dq = 0; dq < dequeCount; dq++) {
             queue.poll();
         }
-        if (queue.contains(checkElement)) {
+
+        int checkNumber = Integer.parseInt(operators[2]);
+        if (queue.contains(checkNumber)){
             System.out.println("true");
         } else {
             int smallestNum = queue.isEmpty() ? 0 : Collections.min(queue);

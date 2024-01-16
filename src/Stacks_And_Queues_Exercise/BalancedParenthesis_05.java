@@ -9,21 +9,21 @@ public class BalancedParenthesis_05 {
 
         String parenthesis = scanner.nextLine();
 
-        ArrayDeque<Character> leftParenthesis = new ArrayDeque<>();
+        ArrayDeque<Character> openingParenthesis = new ArrayDeque<>();
+
         boolean areBalanced = false;
 
         if (parenthesis.length() % 2 == 0) {
-            for (int index = 0; index < parenthesis.length(); index++) {
-                char currParenthesis = parenthesis.charAt(index);
-                if (currParenthesis == '{' || currParenthesis == '[' || currParenthesis == '(') {
-                    leftParenthesis.push(currParenthesis);
-                } else if (currParenthesis == '}' || currParenthesis == ']' || currParenthesis == ')') {
-                    char lastOpen = leftParenthesis.pop();
-                    if (currParenthesis == '}' && lastOpen == '{') {
-                        areBalanced = true;
-                    } else if (currParenthesis == ']' && lastOpen == '[') {
-                        areBalanced = true;
-                    } else if (currParenthesis == ')' && lastOpen == '(') {
+
+            for (int i = 0; i < parenthesis.length(); i++) {
+                char currParenthesis = parenthesis.charAt(i);
+
+                if (currParenthesis == '(' || currParenthesis == '{' || currParenthesis == '[') {
+                    openingParenthesis.push(currParenthesis);
+                } else if (currParenthesis == ')' || currParenthesis == '}' || currParenthesis == ']') {
+                    char lastOpen = openingParenthesis.pop();
+
+                    if (currParenthesis == ')' && lastOpen == '(' || currParenthesis == '}' && lastOpen == '{' || currParenthesis == ']' && lastOpen == '[') {
                         areBalanced = true;
                     } else {
                         areBalanced = false;

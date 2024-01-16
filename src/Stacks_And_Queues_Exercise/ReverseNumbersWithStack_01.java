@@ -1,20 +1,22 @@
 package Stacks_And_Queues_Exercise;
 
 import java.util.ArrayDeque;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class ReverseNumbersWithStack_01 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String[] numbers = scanner.nextLine().split(" ");
-        ArrayDeque<Integer> reversed = new ArrayDeque<>();
+        String[] tokens = scanner.nextLine().split(" ");
+        ArrayDeque<String> reversed = new ArrayDeque<>();
 
-        for (String number : numbers) {
-            reversed.push(Integer.valueOf(number));
+        for (int i = 0; i < tokens.length; i++) {
+            reversed.push(tokens[i]);
         }
-        for (Integer i : reversed) {
-            System.out.print(i + " ");
+        while (!reversed.isEmpty()) {
+            System.out.print(reversed.pop());
+            if (!reversed.isEmpty()){
+                System.out.print(" ");
+            }
         }
     }
 }

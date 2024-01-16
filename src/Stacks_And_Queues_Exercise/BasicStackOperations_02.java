@@ -7,20 +7,23 @@ import java.util.Scanner;
 public class BasicStackOperations_02 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String[] operators = scanner.nextLine().split(" ");
-        int pushCount = Integer.parseInt(operators[0]);
-        int popCount = Integer.parseInt(operators[1]);
-        int checkElement = Integer.parseInt(operators[2]);
-        String[] numbers = scanner.nextLine().split(" ");
 
+        String[] operators = scanner.nextLine().split(" ");
+        String[] numbers = scanner.nextLine().split("\\s+");
         ArrayDeque<Integer> stack = new ArrayDeque<>();
+
+        int pushCount = Integer.parseInt(operators[0]);
         for (int push = 0; push < pushCount; push++) {
             stack.push(Integer.valueOf(numbers[push]));
         }
+
+        int popCount = Integer.parseInt(operators[1]);
         for (int pop = 0; pop < popCount; pop++) {
             stack.pop();
         }
-        if (stack.contains(checkElement)) {
+
+        int checkNumber = Integer.parseInt(operators[2]);
+        if (stack.contains(checkNumber)){
             System.out.println("true");
         } else {
             int smallestNum = stack.isEmpty() ? 0 : Collections.min(stack);
